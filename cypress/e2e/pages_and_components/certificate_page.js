@@ -37,7 +37,7 @@ class CertificatePage{
 
     clickRunProjectButton(){
         this.runProjectButton.click();
-        cy.get(addButtonSelector, {timeout: 20000}).should('be.visible');
+        cy.get(addButtonSelector, {timeout: 600}).should('be.visible');
     }
 
     clickAddButton(){
@@ -55,7 +55,7 @@ class CertificatePage{
     }
 
     waitTillPageDownload(){
-        cy.get(runProjectButtonSelector, {timeout: 6000}).should('be.visible');
+        cy.get(runProjectButtonSelector, {timeout: 1000}).should('be.visible');
     }
 
 }

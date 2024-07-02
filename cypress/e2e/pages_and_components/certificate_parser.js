@@ -1,11 +1,10 @@
-// import {readFileSync} from 'fs';
 import { ASN1 } from '@lapo/asn1js';
 
 
 class CertificateParser{
     constructor(fileName){
         this.fileName = fileName;
-        this.collected = [];
+        this.collectedData = [];
         this.subjectCN;
         this.issuerCN;
         this.dateFrom;
@@ -14,14 +13,17 @@ class CertificateParser{
 
     parseCertificate(data){
         let asn = ASN1.decode(data);
-        this.toPrettyString(asn.sub[0], undefined);
+        this.collectData(asn.sub[0], undefined);
+
         this.subjectCN = this.getSubjectCN();
         this.issuerCN = this.getIssuerCN();
         this.dateFrom = this.getDateFrom();
         this.dateTill = this.getDateTill();
     }
 
-    toPrettyString(asn, indent) {
+    /* this method is copy of toPrettyString(indent) from @lapo/asn1js/asn1.js 
+    with update to collect data as array of objects */
+    collectData(asn, indent) {
         if (indent === undefined) indent = '';
         let s = indent;
         if (asn.def) {
@@ -45,7 +47,7 @@ class CertificateParser{
             s += ': ' + content.replace(/\n/g, '|');
 
             if (asn.typeName() == 'OBJECT_IDENTIFIER' || asn.typeName() == 'UTF8String' || asn.typeName() == 'UTCTime'){
-                this.collected.push({type: asn.typeName(), content: asn.content()});
+                this.collectedData.push({type: asn.typeName(), content: asn.content()});
             }
 
         }
@@ -53,30 +55,30 @@ class CertificateParser{
         if (asn.sub !== null) {
             indent += '  ';
             for (let i = 0, max = asn.sub.length; i < max; ++i)
-                s += this.toPrettyString(asn.sub[i], indent, this.collected);
+                s += this.collectData(asn.sub[i], indent, this.collectedData);
         }
     }
 
     getSubjectCN(){
-        for(let i = this.collected.length - 1; i >=0; i--){
-            const item = this.collected[i];
+        for(let i = this.collectedData.length - 1; i >=0; i--){
+            const item = this.collectedData[i];
             if(item.content.includes('commonName')){
-                return this.collected[i+1].content;
+                return this.collectedData[i+1].content;
             }
         }
     }
 
     getIssuerCN(){
-        for(let i = 0; i < this.collected.length; i++){
-            const item = this.collected[i];
+        for(let i = 0; i < this.collectedData.length; i++){
+            const item = this.collectedData[i];
             if(item.content.includes('commonName')){
-                return this.collected[i+1].content;
+                return this.collectedData[i+1].content;
             }
         }
     }
 
     getDateFrom(){
-        for(const item of this.collected){
+        for(const item of this.collectedData){
             if(item.type == 'UTCTime'){
                 const strs = item.content.split(" ");
                 return strs[0];
@@ -85,8 +87,8 @@ class CertificateParser{
     }
 
     getDateTill(){
-        for(let i = this.collected.length - 1; i >=0; i--){
-            const item = this.collected[i];
+        for(let i = this.collectedData.length - 1; i >=0; i--){
+            const item = this.collectedData[i];
             if(item.type == 'UTCTime'){
                 const strs = item.content.split(" ");
                 return strs[0];
