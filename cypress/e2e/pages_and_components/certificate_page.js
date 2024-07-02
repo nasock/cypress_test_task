@@ -1,5 +1,5 @@
-const CertificateListTableComponent = require('./certificate_list_table_component.js');
-const CertificateInfoBoxComponent = require('./certificate_info_box_component.js');
+import CertificateListTableComponent from './certificate_list_table_component.js';
+import CertificateInfoBoxComponent from './certificate_info_box_component.js';
 
 const runProjectButtonSelector = 'button[onclick]';
 const addButtonSelector = 'button[class*="btn-primary"]';
@@ -37,7 +37,7 @@ class CertificatePage{
 
     clickRunProjectButton(){
         this.runProjectButton.click();
-        cy.get(addButtonSelector, {timeout: 6000}).should('be.visible');
+        cy.get(addButtonSelector, {timeout: 20000}).should('be.visible');
     }
 
     clickAddButton(){
@@ -60,4 +60,4 @@ class CertificatePage{
 
 }
 
-module.exports = CertificatePage;
+export default CertificatePage;

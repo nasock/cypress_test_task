@@ -23,4 +23,4 @@ class CertificateListTableComponent{
     
 }
 
-module.exports = CertificateListTableComponent;
+export default CertificateListTableComponent;

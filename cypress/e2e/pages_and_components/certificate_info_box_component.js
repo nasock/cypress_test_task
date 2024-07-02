@@ -27,4 +27,4 @@ class CertificateInfoBoxComponent{
 
 }
 
-module.exports = CertificateInfoBoxComponent;
+export default CertificateInfoBoxComponent;
