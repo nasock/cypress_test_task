@@ -1,0 +1,37 @@
+ [
+    {
+        "address": "./cypress/fixtures/cert.cer",
+        "common_name": "Таксер Тест Тестерович",
+        "issure_cn": "Тестовий ЦСК АТ \"ІІТ\"",
+        "valid_from": "2015-04-09",
+        "valid_to": "2017-04-09"
+    },
+    {
+        "address": "./cypress/fixtures/cert2.cer",
+        "common_name": "Лиференко Андрій Миколайович",
+        "issure_cn": "АЦСК органів юстиції України",
+        "valid_from": "2017-12-26",
+        "valid_to": "2018-12-26"
+    },
+   {
+        "address": "./cypress/fixtures/czo_2017.cer",
+        "common_name": "Центральний засвідчувальний орган",
+        "issure_cn": "Центральний засвідчувальний орган",
+        "valid_from": "2017-09-22",
+        "valid_to": "2027-09-22"
+    },
+    {
+        "address": "./cypress/fixtures/ekpp_sign_2014.cer",
+        "common_name": "Міністерство доходів і зборів України.\nОТРИМАНО (ЕКПП)",
+        "issure_cn": "Акредитований центр сертифікації ключів ІДД Міндоходів",
+        "valid_from": "2014-01-14",
+        "valid_to": "2016-01-14"
+    },
+    {
+        "address": "./cypress/fixtures/idd_2019.cer",
+        "common_name": "КНЕДП - ІДД ДПС",
+        "issure_cn": "Центральний засвідчувальний орган",
+        "valid_from": "2019-09-24",
+        "valid_to": "2024-09-24"
+    } 
+]
