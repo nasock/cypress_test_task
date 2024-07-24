@@ -5,20 +5,12 @@ class CertificateListTableComponent{
         this.tableElement = tableElement;
     }
 
-    getTableSize(){
-        const elementArray = this.tableElement.get(itemSelector);
-        if(Array.isArray(elementArray)){
-            return elementArray.length;
-        }
-        return 1;
+    getItems(){
+        return this.tableElement.get(itemSelector);
     }
 
     getItemByindex(index){
         return this.tableElement.get(itemSelector).eq(index);
-    }
-
-    getLastAddedItem(){
-        return this.getItemByindex(this.getTableSize() - 1);
     }
     
 }
